@@ -17,18 +17,19 @@ if __name__ == '__main__':
     model.eval()
 
     # Load an image.
-    image_path = '../data/digits/n-1123.jpeg'
+    image_path = '../data/digits/5-2333.jpeg'
     X = Image.open(image_path).convert('L')
 
     # Transform the ndarray into a tensor.
     X = transforms.ToTensor()(X)
-    print(X.shape)
+
     # Remove the first dimention.
     X = X.unsqueeze(0)
-    print(X.shape)
+
     # Pass the image to the model.
     predictions = model(X)
 
     predictions = torch.nn.Softmax(dim=1)(predictions)
     predicted_value = predictions.argmax(1).item()
+    print('The model predicted: ')
     print(labels[predicted_value])
