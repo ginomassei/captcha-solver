@@ -2,11 +2,9 @@ from flask import Flask
 from flask import request
 import torch
 
-
 app = Flask(__name__)
-
-from nnet import NeuralNet
 model = torch.load('captcha-recognizer.pth')
+
 
 @app.route('/ping')
 def ping():
@@ -18,4 +16,4 @@ def ping():
 def solve_captcha():
     file = request.files['captcha']
     print('Jelou')
-    return("Image recived.")
+    return "Image recived."

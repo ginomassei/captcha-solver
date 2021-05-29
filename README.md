@@ -1,4 +1,3 @@
-# captcha-solver
+# Captcha Solver API
 
-
-<p>This is an API that use a Convolutional Neural Network developed with pytorch for recognizing captcha alphanumerical digits.</p>
+<p>This API implements a Convolutional Neural Network developed with pytorch for recognizing captcha alphanumerical digits.</p>
