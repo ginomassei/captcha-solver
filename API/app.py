@@ -21,7 +21,6 @@ model.eval()
 
 @app.route('/ping')
 def ping():
-    print('Hello world!')
     return "Hello"
 
 
