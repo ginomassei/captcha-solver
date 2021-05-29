@@ -25,7 +25,8 @@ class DigitsDataset(Dataset):
 
     def __getitem__(self, index):
         # Load the image.
-        image_path = os.path.join(self.root_dir, self.landmarks_frame.iloc[index, 0])
+        digit_path = self.landmarks_frame.iloc[index, 0]
+        image_path = os.path.join(self.root_dir, digit_path)
         image = Image.open(image_path).convert('L')
 
         # Loading the class of the image.
