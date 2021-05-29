@@ -1,22 +1,18 @@
 import cv2 as cv
-
 import os
 import requests
-
 from random import randint
 
 
 def clean_image(image):
     # Making the image gray.
-    grayImage = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-
+    gray_image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     # Making a binary image.
-    ret, thresholdedImage = cv.threshold(grayImage, 210, 255, cv.THRESH_BINARY)
-
+    ret, thresholded_image = cv.threshold(gray_image, 210, 255, cv.THRESH_BINARY)
     # Median Blur, difuses the straight lines
-    blurredImage = cv.medianBlur(thresholdedImage, ksize=3)
+    blurred_image = cv.medianBlur(thresholded_image, ksize=3)
 
-    return blurredImage
+    return blurred_image
 
 
 def load_images(path):
@@ -69,7 +65,7 @@ def crop_digits(element):
     for x in range(22, width, digit_width):
         if x + digit_width > width:
             break
-        digit = image[0 : height, x : x + digit_width]
+        digit = image[0: height, x: x + digit_width]
 
         cv.imwrite(f'../data/digits/{filename[i]}-{randint(0, 100000)}.jpeg', digit)
         i += 1
