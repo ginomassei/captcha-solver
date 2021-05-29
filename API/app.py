@@ -1,6 +1,5 @@
 import cv2
-from flask import Flask
-from flask import request
+from flask import Flask, request, jsonify
 from model.src.models.Network import NeuralNetwork
 from torchvision import transforms
 from methods import clean_image, crop_digits
@@ -8,6 +7,7 @@ from inversed_labels import labels
 import torch
 
 app = Flask(__name__)
+
 # Instanciate the model.
 model = NeuralNetwork()
 
@@ -57,7 +57,10 @@ def solve():
         predicted_value = predictions.argmax(1).item()
         captcha.append(labels[predicted_value])
 
-    return str(captcha)
+    body = {
+        'captcha': ''.join([str(elem) for elem in captcha])
+    }
+    return jsonify(body)
 
 
 if __name__ == '__main__':
