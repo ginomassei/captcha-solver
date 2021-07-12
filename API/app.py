@@ -1,6 +1,6 @@
 import cv2
 from flask import Flask, request, jsonify
-from model.src.models.Network import NeuralNetwork
+from ..model.src.models.Network import NeuralNetwork
 from torchvision import transforms
 from methods import clean_image, crop_digits
 from inversed_labels import labels
@@ -33,6 +33,7 @@ def solve():
 
     # With CV2 read the image stored, and clean it.
     image = cv2.imread('image.jpeg')
+
     image = clean_image(image)
 
     # Crop each digit into a digits array.
@@ -63,4 +64,4 @@ def solve():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
