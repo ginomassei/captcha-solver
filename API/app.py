@@ -1,10 +1,37 @@
 import cv2
 from flask import Flask, request, jsonify
-from ..model.src.models.Network import NeuralNetwork
 from torchvision import transforms
 from methods import clean_image, crop_digits
 from inversed_labels import labels
 import torch
+from torch import nn
+
+
+class NeuralNetwork(nn.Module):
+    """
+        Neural networ class. Contains a Stack with the different layers to be used.
+        The first layer size is fixed to the size of a digit image.
+        The output is fixed to 36. 26 letters and 10 digits.
+    """
+    def __init__(self):
+        super(NeuralNetwork, self).__init__()
+        self.flatten = nn.Flatten()
+        self.linear_relu_stack = nn.Sequential(
+            nn.Conv2d(1, 128, (3, 3)),
+            nn.ReLU(),
+            nn.AvgPool2d((3, 3)),
+            nn.Conv2d(128, 32, (3, 3)),
+            nn.ReLU(),
+            nn.Conv2d(32, 32, (3, 3)),
+            nn.ReLU(),
+            nn.Flatten(),
+            nn.Linear(320, 36),
+        )
+
+    def forward(self, x):
+        x = self.linear_relu_stack(x)  # Pass the image into the ordered container of modules
+        return x
+
 
 app = Flask(__name__)
 
@@ -64,4 +91,4 @@ def solve():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
