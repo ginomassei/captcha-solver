@@ -13,5 +13,3 @@ de kernel de 3 x 3. De esta manera logro eliminar la mayoría de las líneas rec
 <p>Para iniciar el contenedor de docker <b>"docker run -p 5000:5000 --name nn-API captcha-nn"</b></p>
 
 <p>Esta API tiene un endpont (GET) de testeo: <b>http://localhost/ping</b> que devuelve "Hello" si todo esta funcionando correctamente.</p>
-
-hola como andas todo bien???
